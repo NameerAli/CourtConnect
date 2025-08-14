@@ -85,8 +85,8 @@ CourtConnect is a comprehensive platform designed to facilitate court bookings, 
 
 | Feature               | Status      |
 |-----------------------|-------------|
-| Court Booking System   | ✅ Completed |
-| Online Payments       | ✅ Completed |
+| Court Booking System   | 🔄 In Progress |
+| Online Payments       | 🔄 In Progress |
 | Tournament Management  | 🔄 In Progress |
 | Leaderboard System    | 🔄 Planned  |
 | Mobile App Integration | 🔄 Planned  |
