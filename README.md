@@ -16,68 +16,33 @@ CourtConnect is a comprehensive platform designed to facilitate court bookings, 
 
 ## Getting Started
 
+This project uses Docker Compose for easy setup and development.
+
 ### Prerequisites
 
-- Python 3.x
-- Node.js & npm
-- PostgreSQL (or your preferred database)
+- Docker Desktop (or Docker Engine) installed and running.
 
-### Backend Setup
+### Running with Docker Compose
 
-1. Navigate to the backend directory:
-   ```
-   cd backend
-   ```
+1.  **Build and start the services:**
+    Navigate to the root directory of the project (where `docker-compose.yml` is located) and run:
+    ```bash
+    docker-compose up --build
+    ```
+    This command will:
+    *   Build the Docker images for the backend and frontend.
+    *   Start the PostgreSQL database, backend, and frontend services.
 
-2. Create and activate a virtual environment:
-   ```
-   python -m venv venv
-   source venv/bin/activate    # On Windows use `venv\Scripts\activate`
-   ```
+2.  **Run Django Migrations (first time setup):**
+    Once the services are up, you need to run Django migrations to set up the database schema. Open a new terminal in the project root and execute:
+    ```bash
+    docker-compose exec backend python manage.py migrate
+    ```
+    This command runs the `migrate` command inside the `backend` container.
 
-3. Install dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-
-4. Create a `.env` file for environment variables (sample variables below):
-   ```
-   DEBUG=True
-   SECRET_KEY=your-secret-key
-   DATABASE_URL=postgres://user:password@localhost:5432/courtconnect_db
-   PAYMENT_API_KEY=your-payment-api-key
-   ```
-
-5. Run migrations and start the server:
-   ```
-   python manage.py migrate
-   python manage.py runserver
-   ```
-
----
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-   ```
-   cd frontend
-   ```
-
-2. Install dependencies:
-   ```
-   npm install
-   ```
-
-3. Create a `.env.local` file in the frontend root with environment variables such as:
-   ```
-   NEXT_PUBLIC_API_URL=http://localhost:8000/api
-   NEXT_PUBLIC_STRIPE_KEY=your-stripe-public-key
-   ```
-
-4. Start the development server:
-   ```
-   npm run dev
-   ```
+3.  **Access the applications:**
+    *   **Frontend:** http://localhost:3000
+    *   **Backend API:** http://localhost:8000
 
 ---
 
