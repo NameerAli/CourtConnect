@@ -1,0 +1,35 @@
+name: Code Review
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout your code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Set up Python (you can change to node if using JS)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # Install dependencies (adjust if you use requirements.txt or poetry)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 black
+
+      # Run Black (formatter check)
+      - name: Run Black
+        run: black --check .
+
+      # Run Flake8 (linter)
+      - name: Run Flake8
+        run: flake8 .
