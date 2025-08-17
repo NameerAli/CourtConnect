@@ -6,18 +6,21 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 User = get_user_model()
 
+
 # JWT Custom Token Serializer (adds role to token)
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        token['role'] = user.role
+        token["role"] = user.role
         return token
+
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = RegisterSerializer
+
 
 class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()

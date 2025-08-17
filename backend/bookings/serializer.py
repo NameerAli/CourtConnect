@@ -3,6 +3,7 @@ from .models import Booking
 from courts.models import Court
 from datetime import datetime
 
+
 class BookingSerializer(serializers.ModelSerializer):
     court_name = serializers.CharField(source="court.name", read_only=True)
     user_email = serializers.CharField(source="user.email", read_only=True)
@@ -10,14 +11,21 @@ class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
         fields = [
-            "id", "court", "court_name", "user", "user_email",
-            "booking_date", "start_time", "end_time",
-            "status", "total_price"
+            "id",
+            "court",
+            "court_name",
+            "user",
+            "user_email",
+            "booking_date",
+            "start_time",
+            "end_time",
+            "status",
+            "total_price",
         ]
         read_only_fields = ["status", "total_price"]
 
     def validate(self, data):
-        """ Ensure booking is within court availability & no overlap """
+        """Ensure booking is within court availability & no overlap"""
         court = data["court"]
         booking_date = data["booking_date"]
         start_time = data["start_time"]
@@ -28,9 +36,7 @@ class BookingSerializer(serializers.ModelSerializer):
 
         # check overlaps with existing bookings
         existing_bookings = Booking.objects.filter(
-            court=court,
-            booking_date=booking_date,
-            status__in=["pending", "confirmed"]
+            court=court, booking_date=booking_date, status__in=["pending", "confirmed"]
         )
 
         for booking in existing_bookings:
@@ -38,7 +44,10 @@ class BookingSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError("This slot is already booked.")
 
         # price calculation
-        duration_hours = (datetime.combine(booking_date, end_time) - datetime.combine(booking_date, start_time)).seconds / 3600
+        duration_hours = (
+            datetime.combine(booking_date, end_time)
+            - datetime.combine(booking_date, start_time)
+        ).seconds / 3600
         data["total_price"] = duration_hours * float(court.price_per_hour)
 
         # No past-dated bookings

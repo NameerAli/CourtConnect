@@ -5,6 +5,7 @@ from courts.models import Court
 
 User = settings.AUTH_USER_MODEL
 
+
 class Booking(BaseModel):
     STATUS_CHOICES = [
         ("pending", "Pending"),
@@ -23,8 +24,8 @@ class Booking(BaseModel):
 
     class Meta:
         indexes = [
-            models.Index(fields=['court', 'booking_date']),
-            models.Index(fields=['status']),
+            models.Index(fields=["court", "booking_date"]),
+            models.Index(fields=["status"]),
         ]
 
     def __str__(self):
