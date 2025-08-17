@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "courts",
     "bookings",
     "payments",
+    "common",
 ]
 
 MIDDLEWARE = [
