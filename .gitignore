@@ -1,0 +1,13 @@
+# Virtual environment
+/venv/
+
+# Docker Compose
+docker-compose.override.yml
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+.localized
+Thumbs.db

@@ -1,0 +1,17 @@
+# Byte-code files
+*.pyc
+__pycache__/
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# Database
+*.sqlite3
+
+# Django media and static files (if not managed by Git LFS)
+/media/
+/static/
