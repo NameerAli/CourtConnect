@@ -29,10 +29,6 @@ services:
       dockerfile: Dockerfile.prod
     image: courtconnect-frontend:1.0.0
     container_name: frontend-nextjs
-    command: npm run build && next start
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules # This is to prevent host node_modules from being mounted
     ports:
       - "3000:3000"
     depends_on:
